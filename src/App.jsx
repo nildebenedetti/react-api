@@ -59,6 +59,7 @@ function App() {
       const combinedData = [...actressesWithGender, ...actorsWithGender];
       // 5. Aggiorno lo stato globale
       setAllActorsData(combinedData);
+      console.log(combinedData);
     })
       .catch(err => console.error("Errore nel caricamento dati:", err));
   },
@@ -78,6 +79,7 @@ function App() {
           const bio = actor.biography;
           const img = actor.image;
           const awards = actor.awards.join(', ');
+          const moviesStarred = actor.known_for.join(', ')
           // mi stampo direttamente una card con i dati
           //  di ogni attrice come da richiesta consegna
           return <Card
@@ -87,6 +89,7 @@ function App() {
             birthYear={birthYear}
             bio={bio}
             awards={awards}
+
           />
         })}
       </div>
