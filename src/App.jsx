@@ -8,8 +8,12 @@ import Header from "./components/Header";
 function App() {
       // salvo API URL
     const API_URL = 'https://lanciweb.github.io/demo/api/actresses/';
+    // ora per i boys
+    const API_URL_1 = 'https://lanciweb.github.io/demo/api/actors/';
     // variabile di stato per Actressess data
     const [actressesData, setActressesData] = useState([]);
+    // variabile di stato per i boys
+    const [actorsData, setActorsData] = useState([]);
 
     // funzione per creare fetch dei dati
     const getActressesData = () => {
