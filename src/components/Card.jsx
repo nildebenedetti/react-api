@@ -19,7 +19,7 @@ function Card({
 }
 ) {
 
-    return <div className="card m-3" >
+    return <div className="card m-3 p-2 col">
   <img src={img} className="card-img-top" alt={fullName}></img>
   <div className="card-body">
     <h5 className="card-title">{fullName}</h5>

@@ -34,7 +34,8 @@ function App() {
   },
   []);
 
-  return <div>
+  return <div className="container mx-auto">
+    <div className="row row-cols-4 gap-2">
       {actressesData.map(actress => {
         // dichiarazioni delle costanti
         const id = actress.id;
@@ -54,6 +55,7 @@ function App() {
           awards={awards}
           />
       })}
+  </div>
   </div>
     ;
 }
