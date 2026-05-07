@@ -89,7 +89,7 @@ function App() {
             birthYear={birthYear}
             bio={bio}
             awards={awards}
-
+            moviesStarred={moviesStarred}
           />
         })}
       </div>
