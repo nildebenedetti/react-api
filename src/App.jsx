@@ -32,10 +32,14 @@ function App() {
 
   useEffect(() => {
     // qui chiamero le due funzioni con 
-    getImportedData()
+    getImportedData(API_URL)
+      .then(data => {
+        setActressesData(data);
+      });
+      getImportedData(API_URL_1)
       .then(data => {
         console.log(data);
-        setActressesData(data);
+        setActorsData(data);
       });
   },
   []);
