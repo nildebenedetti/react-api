@@ -37,7 +37,24 @@ function App() {
 
   return <div>
     <ul>
-      ac
+      {actressesData.map(actress => {
+        // dichiarazioni delle costanti
+        const id = actress.id;
+        const fullName = actress.name;
+        const birthYear = actress.birth_year;
+        const bio = actress.biography;
+        const img = actress.image;
+        const awards = actress.awards.join(', ');
+        // mi stampo i dati di ogni attrice come da richiestaconsegna
+        return <li key={actress.id}>
+          {id},
+          {fullName},
+          {birthYear},
+          {bio},
+          {img},
+          {awards} 
+        </li>
+      })}
     </ul>
     <button onClick={clickHandler}> scarica</button>
   </div>
