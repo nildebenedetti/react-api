@@ -15,6 +15,7 @@ function App() {
     // variabile di stato per i boys
     const [actorsData, setActorsData] = useState([]);
     // funzione per creare fetch dei dati 
+    const [allActorsData, setAllActorsData] = useState([]);
     const getImportedData = (url) => {
       return fetch(url)
         .then(response => {
@@ -31,18 +32,20 @@ function App() {
 
 
   useEffect(() => {
-    // qui chiamero le due funzioni con 
+    // qui chiamero le due funzioni con APIURL
     getImportedData(API_URL)
       .then(data => {
         setActressesData(data);
       });
-      getImportedData(API_URL_1)
+    getImportedData(API_URL_1)
       .then(data => {
         console.log(data);
         setActorsData(data);
       });
   },
   []);
+
+  
 
   return <div>
     <Header/>
