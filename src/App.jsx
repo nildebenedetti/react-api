@@ -35,7 +35,6 @@ function App() {
   []);
 
   return <div>
-    <ul>
       {actressesData.map(actress => {
         // dichiarazioni delle costanti
         const id = actress.id;
@@ -44,18 +43,17 @@ function App() {
         const bio = actress.biography;
         const img = actress.image;
         const awards = actress.awards.join(', ');
-        // mi stampo i dati di ogni attrice come da richiestaconsegna
-        return <li key={actress.id}>
-          {id},
-          {fullName},
-          {birthYear},
-          {bio},
-          {img},
-          {awards}
-        </li>
+        // mi stampo direttamente una card con i dati
+        //  di ogni attrice come da richiesta consegna
+        return <Card
+          key={id}
+          img={img}
+          fullName={fullName}
+          birthYear={birthYear}
+          bio={bio}
+          awards={awards}
+          />
       })}
-    </ul>
-    <Card/>
   </div>
     ;
 }
