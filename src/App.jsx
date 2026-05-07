@@ -33,31 +33,41 @@ function App() {
 
   useEffect(() => {
     // qui chiamero le due funzioni con APIURL
-      // Promise.all esegue entrambe le chiamate contemporaneamente
-      // e aspetta che siano finite ENTRAMBE
-      Promise.all([
-        getImportedData(API_URL),   // Prima chiamata
-        getImportedData(API_URL_1)  // Seconda chiamata
-      ])
-        .then(([dataActresses, dataActors]) => {
-          // 1. Aggiorno i singoli stati
-          setActressesData(dataActresses);
-          setActorsData(dataActors);
+    // Promise.all esegue entrambe le chiamate contemporaneamente
+    // e aspetta che siano finite ENTRAMBE
+    Promise.all([
+      getImportedData(API_URL),   // Prima chiamata
+      getImportedData(API_URL_1)  // Seconda chiamata
+    ])
+    then(([dataActresses, dataActors]) => {
+      // 1. Aggiungo il genere "Donna" a ogni attrice
+      const actressesWithGender = dataActresses.map(item => ({
+        ...item,
+        gender: 'donna'
+      }));
 
-          // 2. Creo l'unione dei due dati usando i risultati
-          const combinedData = [...dataActresses, ...dataActors];
+      // 2. Aggiungo il genere "Uomo" a ogni attore
+      const actorsWithGender = dataActors.map(item => ({
+        ...item,
+        gender: 'uomo'
+      }));
+      // 3. Aggiorni gli stati singoli con i dati arricchiti
+      setActressesData(actressesWithGender);
+      setActorsData(actorsWithGender);
 
-          // 3. Aggiorni lo stato globale
-          setAllActorsData(combinedData);
+      // 4. Creo l'unione dei due array
+      const combinedData = [...actressesWithGender, ...actorsWithGender];
 
-          // Nota: il console.log qui sotto mostrerà i dati appena creati
-          console.log("Dati combinati:", combinedData);
-        })
-        .catch(err => console.error("Errore nel caricamento dati:", err));
+      // 5. Aggiorno lo stato globale
+      setAllActorsData(combinedData);
+
+      console.log("Dati combinati con genere:", combinedData);
+    })
+      .catch(err => console.error("Errore nel caricamento dati:", err));
   },
     []);
 
-
+  // 
 
   return <div>
     <Header />
