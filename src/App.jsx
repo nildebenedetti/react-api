@@ -6,72 +6,84 @@ import Header from "./components/Header";
 
 
 function App() {
-      // salvo API URL
-    const API_URL = 'https://lanciweb.github.io/demo/api/actresses/';
-    // ora per i boys
-    const API_URL_1 = 'https://lanciweb.github.io/demo/api/actors/';
-    // variabile di stato per Actressess data
-    const [actressesData, setActressesData] = useState([]);
-    // variabile di stato per i boys
-    const [actorsData, setActorsData] = useState([]);
-    // funzione per creare fetch dei dati 
-    const [allActorsData, setAllActorsData] = useState([]);
-    const getImportedData = (url) => {
-      return fetch(url)
-        .then(response => {
-          return response.json();
-        })
-        .then(json => {
-          const data = json;
-          return data;
-        })
-        .catch(error =>
-          console.error('probleminooo', error)
-        )
-    };
+  // salvo API URL
+  const API_URL = 'https://lanciweb.github.io/demo/api/actresses/';
+  // ora per i boys
+  const API_URL_1 = 'https://lanciweb.github.io/demo/api/actors/';
+  // variabile di stato per Actressess data
+  const [actressesData, setActressesData] = useState([]);
+  // variabile di stato per i boys
+  const [actorsData, setActorsData] = useState([]);
+  // funzione per creare fetch dei dati 
+  const [allActorsData, setAllActorsData] = useState([]);
+  const getImportedData = (url) => {
+    return fetch(url)
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        const data = json;
+        return data;
+      })
+      .catch(error =>
+        console.error('probleminooo', error)
+      )
+  };
 
 
   useEffect(() => {
     // qui chiamero le due funzioni con APIURL
-    getImportedData(API_URL)
-      .then(data => {
-        setActressesData(data);
-      });
-    getImportedData(API_URL_1)
-      .then(data => {
-        console.log(data);
-        setActorsData(data);
-      });
-  },
-  []);
+      // Promise.all esegue entrambe le chiamate contemporaneamente
+      // e aspetta che siano finite ENTRAMBE
+      Promise.all([
+        getImportedData(API_URL),   // Prima chiamata
+        getImportedData(API_URL_1)  // Seconda chiamata
+      ])
+        .then(([dataActresses, dataActors]) => {
+          // 1. Aggiorno i singoli stati
+          setActressesData(dataActresses);
+          setActorsData(dataActors);
 
-  
+          // 2. Creo l'unione dei due dati usando i risultati
+          const combinedData = [...dataActresses, ...dataActors];
+
+          // 3. Aggiorni lo stato globale
+          setAllActorsData(combinedData);
+
+          // Nota: il console.log qui sotto mostrerà i dati appena creati
+          console.log("Dati combinati:", combinedData);
+        })
+        .catch(err => console.error("Errore nel caricamento dati:", err));
+  },
+    []);
+
+
 
   return <div>
-    <Header/>
-  <div className="container mx-auto">
-    <div className="row row-cols-4 gap-2">
-      {actressesData.map(actress => {
-        // dichiarazioni delle costanti
-        const id = actress.id;
-        const fullName = actress.name;
-        const birthYear = actress.birth_year;
-        const bio = actress.biography;
-        const img = actress.image;
-        const awards = actress.awards.join(', ');
-        // mi stampo direttamente una card con i dati
-        //  di ogni attrice come da richiesta consegna
-        return <Card
-          key={id}
-          img={img}
-          fullName={fullName}
-          birthYear={birthYear}
-          bio={bio}
-          awards={awards}
+    <Header />
+    <div className="container mx-auto">
+      <div className="row row-cols-4 gap-2">
+        {actressesData.map(actress => {
+          // dichiarazioni delle costanti
+          const id = actress.id;
+          const fullName = actress.name;
+          const birthYear = actress.birth_year;
+          const bio = actress.biography;
+          const img = actress.image;
+          const awards = actress.awards.join(', ');
+          // mi stampo direttamente una card con i dati
+          //  di ogni attrice come da richiesta consegna
+          return <Card
+            key={id}
+            img={img}
+            fullName={fullName}
+            birthYear={birthYear}
+            bio={bio}
+            awards={awards}
           />
-      })}
-  </div>
-  </div>
+        })}
+      </div>
+    </div>
   </div>
     ;
 }
