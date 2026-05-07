@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import Card from "./components/Card";
 import "./styles/index.css";
+import Header from "./components/Header";
 
 
 function App() {
@@ -35,7 +36,9 @@ function App() {
   },
   []);
 
-  return <div className="container mx-auto">
+  return <div>
+    <Header/>
+  <div className="container mx-auto">
     <div className="row row-cols-4 gap-2">
       {actressesData.map(actress => {
         // dichiarazioni delle costanti
@@ -56,6 +59,7 @@ function App() {
           awards={awards}
           />
       })}
+  </div>
   </div>
   </div>
     ;
