@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import Card from "./components/Card";
+import "./styles/index.css";
 
 
 function App() {
