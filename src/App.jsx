@@ -1,23 +1,38 @@
+import { useState } from "react";
+import { useEffect } from "react";
+
 
 
 function App() {
 
   const API_URL = 'https://lanciweb.github.io/demo/api/actresses/';
 
-  fetch(API_URL)
-    .then (response => {
+  const [ActressesData, setActressesData] = [];
+
+
+  const getActressesData = () => fetch(API_URL)
+    .then(response => {
       return response.json();
     })
-    .then (data => 
-      console.log(data),
-    )
-    .catch (error =>
-      console.error('probleminooo',error)
+    .then(data => {
+    return data
+    console.log('funzione per fetch')
+    })
+    .catch(error =>
+      console.error('probleminooo', error)
     );
 
-  return <div>
+    const clickHandler = () => {
+      console.log('click!');
+      getActressesData();
+      
+    }
 
+  return <div>
+    <ul>
+    </ul>
+    <button onClick={clickHandler}> scarica</button>
   </div>
-  ;
+    ;
 }
 export default App;
