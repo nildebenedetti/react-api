@@ -1,8 +1,12 @@
-import HelloClasse154 from "./components/HelloClasse154";
+
 
 function App() {
-  return (
-    <HelloClasse154 />
-  );
+
+  const API_URL = 'https://lanciweb.github.io/demo/api/actresses/';
+
+  return <div>
+
+  </div>
+  ;
 }
 export default App;
