@@ -10,21 +10,26 @@ function App() {
   const [ActressesData, setActressesData] = [];
 
 
-  const getActressesData = () => fetch(API_URL)
+  const getActressesData = () => {
+    return fetch(API_URL)
+
     .then(response => {
       return response.json();
     })
-    .then(data => {
-    return data
-    console.log('funzione per fetch')
+    .then(json => {
+    const data = json;
+    return data;
     })
     .catch(error =>
       console.error('probleminooo', error)
-    );
+    )};
 
     const clickHandler = () => {
       console.log('click!');
-      getActressesData();
+      getActressesData()
+      .then(data => {
+        console.log(data);
+      });
       
     }
 
