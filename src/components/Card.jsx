@@ -24,7 +24,7 @@ function Card({
   <div className="card-body">
     <h5 className="card-title">{fullName}</h5>
     <p className="card-text">{`Born in ${birthYear}.`}</p>
-    <p className="card-text">{}`Awards won: ${awards}.`}</p>
+    <p className="card-text">{`Awards won: ${awards}.`}</p>
     <p className="card-text">{bio}</p>
   </div>
 </div>
