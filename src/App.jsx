@@ -43,12 +43,14 @@ function App() {
       // 1. Aggiungo il genere "Donna" a ogni attrice
       const actressesWithGender = dataActresses.map(item => ({
         ...item,
-        gender: 'donna'
+        gender: 'donna',
+        id: crypto.randomUUID()
       }));
       // 2. Aggiungo il genere "Uomo" a ogni attore
       const actorsWithGender = dataActors.map(item => ({
         ...item,
-        gender: 'uomo'
+        gender: 'uomo',
+        id: crypto.randomUUID()
       }));
       // 3. Aggiorni gli stati singoli con i dati arricchiti
       setActressesData(actressesWithGender);
