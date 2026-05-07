@@ -39,13 +39,12 @@ function App() {
       getImportedData(API_URL),   // Prima chiamata
       getImportedData(API_URL_1)  // Seconda chiamata
     ])
-    then(([dataActresses, dataActors]) => {
+    .then(([dataActresses, dataActors]) => {
       // 1. Aggiungo il genere "Donna" a ogni attrice
       const actressesWithGender = dataActresses.map(item => ({
         ...item,
         gender: 'donna'
       }));
-
       // 2. Aggiungo il genere "Uomo" a ogni attore
       const actorsWithGender = dataActors.map(item => ({
         ...item,
@@ -54,14 +53,10 @@ function App() {
       // 3. Aggiorni gli stati singoli con i dati arricchiti
       setActressesData(actressesWithGender);
       setActorsData(actorsWithGender);
-
       // 4. Creo l'unione dei due array
       const combinedData = [...actressesWithGender, ...actorsWithGender];
-
       // 5. Aggiorno lo stato globale
       setAllActorsData(combinedData);
-
-      console.log("Dati combinati con genere:", combinedData);
     })
       .catch(err => console.error("Errore nel caricamento dati:", err));
   },
@@ -73,14 +68,14 @@ function App() {
     <Header />
     <div className="container mx-auto">
       <div className="row row-cols-4 gap-2">
-        {actressesData.map(actress => {
+        {allActorsData.map(actor => {
           // dichiarazioni delle costanti
-          const id = actress.id;
-          const fullName = actress.name;
-          const birthYear = actress.birth_year;
-          const bio = actress.biography;
-          const img = actress.image;
-          const awards = actress.awards.join(', ');
+          const id = actor.id;
+          const fullName = actor.name;
+          const birthYear = actor.birth_year;
+          const bio = actor.biography;
+          const img = actor.image;
+          const awards = actor.awards.join(', ');
           // mi stampo direttamente una card con i dati
           //  di ogni attrice come da richiesta consegna
           return <Card
