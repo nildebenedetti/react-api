@@ -26,7 +26,7 @@ function App() {
         return data;
       })
       .catch(error =>
-        console.error('probleminooo', error)
+        console.error('probleminooo', error);
       )
   };
 
@@ -43,14 +43,14 @@ function App() {
       // 1. Aggiungo il genere "Donna" a ogni attrice
       const actressesWithGender = dataActresses.map(item => ({
         ...item,
-        gender: 'donna',
-        id: crypto.randomUUID()
+        gender: 'female',
+        keyId: crypto.randomUUID()
       }));
       // 2. Aggiungo il genere "Uomo" a ogni attore
       const actorsWithGender = dataActors.map(item => ({
         ...item,
-        gender: 'uomo',
-        id: crypto.randomUUID()
+        gender: 'male',
+        keyId: crypto.randomUUID()
       }));
       // 3. Aggiorni gli stati singoli con i dati arricchiti
       setActressesData(actressesWithGender);
@@ -72,7 +72,7 @@ function App() {
     <div className="container mx-auto">
       <div className="row row-cols-4 gap-2">
         {allActorsData.map(actor => {
-          // dichiarazioni delle costanti
+          // dichiarazioni delle costanti - provo a spostarle in fase di fetch
           const id = actor.id;
           const fullName = actor.name;
           const birthYear = actor.birth_year;
